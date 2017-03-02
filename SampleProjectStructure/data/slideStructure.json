@@ -1,0 +1,109 @@
+{
+	"sitemap" : {
+
+		"presentations" : {
+			"presentationAlias1" : "someVeevaPresentation1",
+			"presentationAlias2" : "someVeevaPresentation2"	
+		},
+		"keymessages" : {
+			"kmAlias1" : [
+				"someKeyMessage1",
+				"presentationAlias2"
+			],
+			"kmAlias2" : [
+				"someKeyMessage2",
+				"presentationAlias1"
+			],
+			"kmAlias3" : [
+				"someOtherKeyMessage",
+				"presentationAlias1"
+			]
+		}
+
+	},
+
+	"presentation": {
+
+		"contentType" : "html",
+
+		"contentDirectory" : "media/Proactive_Formulary",
+
+		"convention" : {
+
+			"prefix" : "Slide",
+			"filetype" : "jpg",
+			"numSlides" : 45
+
+		},
+
+		"sections": [
+
+			{
+				"label":"Landing/Home",
+				"index":0,
+				"display":true,
+				"slides":[
+					{
+						"section":0,
+						"id":"page1ID",
+						"swipable":"true",
+						"source":"page1.html",
+						"resourcedir":"slides/",
+						"customproperties" : {
+							"test1":"test1 prop"
+						},
+						"next":{
+							"section" : 1
+						}
+					},
+					{
+						"section":1,
+						"id":"page2ID",
+						"swipable":"true",
+						"source":"page2.html",
+						"resourcedir":"slides/",
+						"customproperties" : {
+							"test2":"test2 prop"
+						},
+						"events":{
+							"focus":"page2Focus",
+							"blur":"page2Blur", 
+							"load":"page2Load"
+						}
+					},
+					{
+						"section":2,
+						"id":"page3ID",
+						"next":{"section":3},
+						"previous" : {
+							"section":1
+						}
+						"swipable":"true",
+						"source":"page3.html",
+						"resourcedir":"slides/"
+					}
+				]
+			},
+			{
+				"label":"Section 3",
+				"index":3,
+				"display":true,
+				"slides":[
+					{
+						"previous" : {
+							"section":2
+						},
+						"section":3,
+						"id":"page4ID",
+						"swipable":"true",
+						"source":"page4.html",
+						"resourcedir":"slides/"
+					}
+				]
+			}
+
+		]
+
+	}
+
+}

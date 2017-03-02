@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<script type='text/javascript'>
+			//any page content specific script can go here
+			function page2Focus(){
+				//some focus statements here
+				console.log('slide 2 in focus');
+			}
+			function page2Blur(){
+				//some blur statements here
+				console.log('slide 2 off screen');
+			}
+			function page2Load(){
+				console.log('slide 2 loaded');
+			}
+
+
+
+			//nested presentation carousel test setup
+			function page2init(){
+
+				var wrappers = {
+					carouselID : 'page-2-subcontent',
+					presID : 'page-2',
+					navID : null,
+
+				}
+				var newopts = {
+					jsonURL : 'data/page2subslideStructure.json',
+					swipedirection: 'vertical',
+					dragthreshold : 150,
+					height: 281,
+					width: 922,
+					paginate : false,
+					presentationName : 'sub1',
+					wrappers: wrappers
+				}
+
+				//subpresentation init method called when checkLoad of all subslides have completed. subpresentation defined in page2.html in samples
+				function subpresentationInit(){
+					//subpresentation object init
+					page2Ainit();
+					page2Binit();
+				}
+
+				sidekick.createPresentation( newopts, subpresentationInit );
+
+			}
+		</script>
+		<style>
+			/* page styles can go here */
+			#page-2{
+				width: 100%; height: 100%;
+				padding: 5%;
+				box-sizing: border-box;
+				-webkit-box-sizing: border-box;
+			}
+			#page-2 h1{
+				font-size: 125%;
+			}
+			#page-2-subcontent{
+				margin-top: 5%;
+				width: 100%;
+				height: 50%;
+				position: relative;
+				overflow: hidden;
+				border-radius: 10px;
+			}
+
+			#page-2-subcontent .slide{
+				background: #eee;
+			}
+
+		</style>
+	</head>
+	<body>
+		<div id='page-2'>
+			<h1>Test Slide 2</h1>
+			<p>Here you can say some stuff for your presentation. blah!</p>
+
+			<div id='page-2-subcontent'></div>
+		</div>
+	</body>
+</html>

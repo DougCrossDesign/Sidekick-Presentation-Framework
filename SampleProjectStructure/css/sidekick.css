@@ -1,0 +1,130 @@
+/*
+ *	Sidekick.css
+ * 	March 2015
+ * 	V.1.0.1
+ *
+ *	Description:
+ * 		Defines framework level stylings for general class types including
+ * 		presentation wrappers, slides, section navs and carousels
+ *
+ *  	Note:
+ *		*** DO NOT DIRECTLY EDIT THIS FILE ***
+ *  		Create app specific rules in the template.css file or other filename of your choosing
+ *  		Use element IDs to override existing framework rules if required
+ */
+
+
+ /* presentation wrapper */
+.presentation-wrapper {
+	width: 100%;
+	height: 100%;
+	overflow:hidden;
+	position: relative;
+	touch-action: none;				/* stops IE10+ browser from intercepting touch events */
+	-webkit-touch-callout: none;
+	-webkit-user-select: none;
+	-khtml-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
+}
+	/* carousel wrapper */
+	.slide-carousel {
+		width:100%; height:auto;
+		position: relative;
+		-webkit-perspective: 3000px;
+		perspective: 3000px;
+		transform-style: preserve-3d;
+		-webkit-transform-style: preserve-3d;
+	}
+
+		/* presentation slide class */
+		.slide-carousel .slide{
+			position: absolute;
+			width: 100%; height: 100%;
+			overflow: inherit;
+			visibility: visible;
+			transform: none;
+			transition: transform 500ms ease-out, opacity 500ms ease;
+			backface-visibility: hidden;
+			-webkit-transform: none;
+			-webkit-transform-origin: 50% 50%;
+			-webkit-transition: -webkit-transform 500ms ease-out, opacity 500ms ease;
+			-webkit-backface-visibility: hidden;
+		}
+		.slide-carousel .slide.prev{
+			opacity: .25;
+		}
+		.slide-carousel .slide.next{
+			opacity: .25;
+		}
+		/* define slide transition properties based on container class orientation */
+		/* class orientation of container set by 'swipedirection' option during presentation creation */
+		.slide-carousel.horizontal .slide.prev{
+			transform: translateX(-100%);
+			-webkit-transform: translateX(-100%);
+		}
+		.slide-carousel.horizontal .slide.next{
+			transform: translateX(100%);
+			-webkit-transform: translateX(100%);
+		}
+		.slide-carousel.vertical .slide.prev{
+			transform: translateY(-100%);
+			-webkit-transform: translateY(-100%);
+		}
+		.slide-carousel.vertical .slide.next{
+			transform: translateY(100%);
+			-webkit-transform: translateY(100%);
+		}
+		/* define other transition rules that alter/override direction-based classes */
+		.slide-carousel .slide.notrans{
+			transition: none !important;
+			-webkit-transition: none !important;
+		}
+		.slide-carousel .slide.invisible{
+			visibility: hidden;
+			transition: visibility 0s 2s;
+			-webkit-transition: visibility 0s 2s;
+		}
+		.slide-carousel .slide.nodisplay{
+			display: none;
+		}
+		.slide-carousel .slide.transparent{
+			opacity: 0;
+		}
+
+
+			/* slide content wrapper
+			 * inserted by framework into all slide wrappers to house slide content */
+			.slide-carousel .slide > .slide-content-wrapper{
+				width: 100%; height: 100%;
+				position: relative;
+				display: flex;
+				display: -webkit-flex;
+				justify-content: center;
+				-webkit-justify-content: center;
+				align-items: center;
+				-webkit-align-items: center;
+			}
+
+
+		.slide-carousel .image-slide{
+			width: 100%;
+			height: auto;
+		}
+
+
+
+	/* section nav elements */
+	.section-navigation{
+		width: 100%; height: 100%;
+	}
+	.section-navigation li{
+		width: auto; height: 100%;
+		list-style: none;
+		display: inline-block;
+		cursor: pointer;
+	}
+	.section-navigation li.disabled{
+		opacity: .4;
+	}

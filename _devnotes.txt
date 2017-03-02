@@ -1,0 +1,74 @@
+Dev Notes V.1.1
+
+Initial Use :
+Generalized framework for PPT conversions. Can be easily extended to include additional custom behavior. Expanded to support more abstract concepts with greater flexibility.
+
+Important Includes : 	veevaquery.js				//custom veeva query functions built ontop of the veeva API, making query capabilities both concise and robust.
+			clmTracker.js				//necessary for anonymous data capture for IT reporting
+			
+Other Dependencies : 	slideStructure.json			//user defined structure for presentation information
+			framework.css	
+		
+Overview: This is a framework that attempts to establish a consistent architecture for presentation/i-vis type applications sharing similar requirements in layout, function and structure. The code base is split into sections that define a set of features relevant to the scope of the section. The lowest level consists of a basic sliding carousel which manages basic swipe/drag interactivity and transition between individual slides. Slides themselves are represented as individual object instances which can hold custom data unique to that slide. Extending this basic carousel is a generic project structure which manages and handles multiple sections with multiple slides, linking navigation to slide management on a presentation level, initialization and project status caching. This is wrapped by a broader API known as Wingman that is extendable to include more abstract, generalized tasks.
+	
+The framework relies on a JSON file to define the data structure of the presentation. The framework is dependent on this general structure but can easily be extended to include additional properties as necessary. The presentation is divided into an array of section objects which stores information about the section as well as a subproperty storing an array of slide objects similarly structured to a section. Each slide object has a 'customproperties' property which is an object that auto-assigns all child properties to the slide. Additionally, each slide object has an 'events' property which represents an object defining custom event handlers. the key is the event name, currently supporting ['load','focus','blur','transitionto' and 'transitionfrom'] - while the value is a pre-defined named global function represented as a string. this function is executed at the time the custom event fires. A 'next' or 'prev' property can be set to an object representing a jumpto redirect to a different slide and section or different Key Message entirely. This fires in priority over a typical left/right cycling of the slide carousel.
+	
+Within the main.js file included in the project structure, the project instance is defined. This is largely where extensions of the base functions and features of the framework should live. When the DOM content is ready, the project instance must call its prototypal 'build()' method, including at least the HTML object reference or element ID of the slide carousel container, and optionally a similar reference for a main navigation container, and a callback to fire once finished executing. the JSON data is returned as an argument to the callback method. Slides are loaded in asynchronously and accrue a load count once the content has finished being injected into the main document. Once all slides load, an optional callback method is triggered, which redirects to a global static function labeled 'mainInit()' within the main.js file by default. This is where all content-dependent script must first be initialized to ensure the objects exist within the DOM upon execution.
+	
+The directory structure is broken out into content folders specific to the function of the content. CSS, JS, JSON data, Fonts and Slide content all have their designated folders. Slide specific content placement can be variable by defining that content's base location within that slide object within the slidestructure.json setup. This location definition sets a root directory reference for all related content associated with that slide. Each slide can have linked scripts and stylesheets or can embed script into its head element to be injected into the main document. To ensure the script fires when the page becomes ready, wrap the script or its main functions within an init function triggered by 'mainInit()' within the main.js file. Keeping content specific to that slide defined within the slide's head element keeps that script and styling clearly associated with the content on that page, HOWEVER: that script will be injected into the main document and can affect script and styles from other sections and slides! It is therefore recommended to encapsulate scripts and styles appropriately to ensure they remain within the intended scope.
+	
+
+JSON Structure notes:
+-Sitemap object
+
+presentations: a dictionary of salesforce presentationID's
+keymessages: a dictionary including keymessageIDs and a presentation alias as described in the presentations dictionary
+
+-Section object
+
+display: determines whether that section is active or inactive. this will also affect any main navigation interactivity linked to the section.
+		
+-Slide object
+
+id: REQUIRED - sets a unique ID to the slide to identify that slide object. Framework uses this to compare slides, keep them unique! can be any alphanumeric string
+section: declare the slide's intended section, though this is not used to determine the section association (the JSON structure does).
+resourcedir: a relative base path to look for all assets associated with this slide object.
+source: the source HTML file containing the slide's main content.
+swipable: determines whether the slide can be swiped left/right or not. false value locks the slide from swipe interactivity.
+customproperties: an object defining any desired custom properties to associate with the slide. can be accessed from the slide object after loading
+events: define custom function when certain custom events are triggered within the application's framework. must be a string representation of a pre-defined named global function
+prev: an object defining where the presentation should be linked to when swiping to a 'previous' slide (right).
+next: an object defining where the presentation should be linked to when swiping to a 'next' slide (left);
+			
+		
+
+Key Message Caching notes:
+This framework allows a developer to cache the presentation's current state. By default, the current active section and slide ID is cached. Additional data can be cached by sending an object with presentation-specific data through the caching method as an argument. Additionally, a function name can be passed to execute as a callback when the cache is loaded from its saved state. The cache method can be accessed via MyProjectInstance.cache.captureState([custom object, callback]). Defining a callback method can allow a developer to gain access to specific variable states that were saved within the custom object to rebuild specific states within a slide if need be. All caching is initiated MANUALLY by invoking the captureState() method. Successive captureState() calls overwrite each other, and can be erased with the clear() method to clear the cache. Once the data is cleared it must be re-captured before the page unloads in order to be recognized upon reload.
+		
+Currently the localStorage key is static and is shared by ALL presentations with this framework. Future revisions will make this dependent on the actual key message name through veeva CLM queries to allow for unique KM localStorage caching.
+
+
+
+
+
+Globalopts framework supported properties:
+
+*NOTE: object options are fully expandable to include other custom opts that app-specific code might wish to utilize
+{
+	cropslidemargins: 	//boolean - when set to true, adjacent slides have zero margin space between them during transition
+	dragthreshold : 	//sets a threshold distance (in pixels) required for slide cycling to initiate
+	height : 		//intended native display height of the presentation (in pixels),
+	jsonURL : 		//*REQURED* - a relative path to JSON data containing presentation structure/slide data
+	momentumweight : 	//how much inertia swipe momentum carries
+	presentationName :	//*REQURED* - an alias to use for a presentation. required to access newly-created presentation object
+	startsection : 		//index of which section to show when project is initially loaded
+	startslideID : 		//Object id of which slide to show when project is initially loaded (must be within 'startsection')
+	swipedirection : 	//inherent direction swipe gestures originate to cycle carousel
+	usekeymessages : 	//a boolean flag to let framework know if it should be using internal data structure or veeva links for section/slide navigation
+	width: 			//intended native display width of the presentation (in pixels)
+	wrappers : 		//a dictionary of wrapper element ID's for key structures within the presentation wireframe
+}
+
+
+			
+			

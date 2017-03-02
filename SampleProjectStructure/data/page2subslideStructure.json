@@ -1,0 +1,33 @@
+{
+	"presentation": {
+		"sections": [
+			{
+				"label":"subslide page 2",
+				"index":0,
+				"display":true,
+				"slides":[
+					{
+						"section":0,
+						"id":"page2AID",
+						"swipable":"true",
+						"source":"page2A.html",
+						"resourcedir":"slides/subslides/",
+						"customproperties" : {
+							"test1":"test1 prop"
+						}
+					},
+					{
+						"section":0,
+						"id":"page2BID",
+						"swipable":"true",
+						"source":"page2B.html",
+						"resourcedir":"slides/subslides/",
+						"customproperties" : {
+							"test1":"test1 prop"
+						}
+					}
+				]
+			}
+		]
+	}
+}

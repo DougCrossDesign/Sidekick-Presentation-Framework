@@ -1,0 +1,749 @@
+<!DOCTYPE html>
+
+<html>
+
+	<head>
+
+		<title>Sidekick.js overview - structure of obejcts</title>
+
+		<style>
+
+			*{
+				width: auto;
+				height: auto;
+				padding: 0;
+				margin: 0;
+				font-family: inherit;
+				font-size: inherit;
+				outline: none;
+				border: none;
+				display: relative;
+			}
+
+			body{
+				width: 100%;
+				height: 100%;
+				position: absolute;
+				font-size: 1em;
+				font-family: sans-serif;
+				font-weight: 300;
+			}
+			h1,h2,h3,h4,h5,h6{
+				font-size: normal;
+			}
+			.content{
+				box-sizing: border-box;
+				-webkit-box-sizing: border-box;
+				padding: 30px;
+			}
+			.entity{
+				margin-bottom: 100px;
+				display: flex;
+				display: -webkit-flex;
+				flex-direction: column;
+				-webkit-flex-direction: column;
+			}
+				.entity > header{
+					margin-bottom: 30px;
+				}
+				.entity > header h2{
+					font-size: 2em;
+				}
+				.entity > header p{
+					font-size: 1.25em;
+					padding-left:;
+				}
+				.entity > section{
+					margin-bottom: 15px;
+					margin-left: 50px;
+				}
+				.entity > section h3{
+					font-size: 1.5em;
+					margin-bottom: 15px;
+				}
+				.entity > section .property{
+					margin-left: 50px;
+					margin-bottom: 15px;
+				}
+				.entity > section .property h4:after{
+					content: " :";
+				}
+				.entity > section .property .details{
+					margin-left: 25px;
+					display: flex;
+					display: -webkit-flex;
+					align-items: flex-start;
+					-webkit-align-items: flex-start;
+				}
+				.entity > section .property .details > *{
+					margin: 5px 0;
+				}
+				.entity > section .property .details header{
+					min-width: 100px;
+				}
+				.entity > section .property .details ul{
+					display: flex;
+					display: -webkit-flex;
+					flex-direction: row;
+					-webkit-flex-direction: row;
+					justify-content: flex-start;
+					-webkit-justify-content: flex-start;
+					align-items: flex-start;
+					-webkit-align-items: flex-start;
+				}
+				.entity > section .property .details ul li{
+					list-style : none;
+					margin-right: 12px;
+				}
+				.entity > section .property .details ul li:after{
+					content: ",";
+				}
+				.entity > section .property .details ul li:last-child:after{
+					display: none;
+				}
+
+
+
+		</style>
+
+	</head>
+
+	<body>
+
+		<div class="content">
+
+			<article class="entity" id="Sidekick">
+
+
+				<header>
+					<h2>Sidekick</h2>
+					<p>A self-executing, enclosed namespace providing a main accessor object to the Sidekick.js framework.</p>
+				</header>
+
+				<section>
+					<h3>Properties</h3>
+					<div class='property' id="Sidekick_presentation">
+						<h4>presentation</h4>
+						<p class="description">an object storing key:value pair for references to presentation objects created by <a href="#Sidekick_createPresentation">createPresentation</a> method. A default 'main' instance is created if no specific naming convention is passed during the createPresentation method. Subpresentations require a unique key to identify them within this property.</p>
+					</div>
+				</section>
+
+				<section>
+					<h3>Methods</h3>
+
+					<div class='property' id="Sidekick_cache">
+						<h4>cache</h4>
+						<div class="details">
+							<header>parameters</header>
+							<span>none</span>
+						</div>
+						<div class="details">
+							<header>description</header>
+							<p>creates and returns a HistoryCache object</p>
+						</div>
+					</div>
+
+					<div class='property' id="Sidekick_createEventManager">
+
+						<h4>createEventManager</h4>
+
+						<div class="details">
+							<header>parameters</header>
+							<span>none</span>
+						</div>
+
+						<div class="details">
+							<header>description</header>
+							<p>an alias to the <em class='private'>private</em> function EventManager</p>
+						</div>
+
+					</div>
+
+
+					<div class='property' id="Sidekick_createPresentation">
+
+						<h4>createPresentation</h4>
+
+						<div class="details">
+							<header>parameters</header>
+							<ul>
+								<li class="type object">presentationOptions</li>
+								<li class="type function">callback</li>
+							</ul>
+						</div>
+						<div class="details">
+							<header>description</header>
+							<p>Create's a Presentation instance and stores it within the presentation object property. Uses default key 'main' unless otherwise specified in presentationOptions. Concurrent Presentation instances created through this method MUST contain unique keys or will be thrown an error.</p>
+						</div>
+					</div>
+
+
+					<div class='property' id="Sidekick_load">
+
+						<h4>createPresentation</h4>
+
+						<div class="details">
+							<header>parameters</header>
+							<span>none</span>
+						</div>
+						<div class="details">
+							<header>description</header>
+							<p>an alias to the <em class='private'>private</em> function XHRload - a cross-browser compatible method for loading HTML content from external files on the fly utilizing XMLHttpRequest</p>
+						</div>
+					</div>
+
+
+					<div class='property' id="Sidekick_load">
+
+						<h4>veevaQuery</h4>
+
+						<div class="details">
+							<header>parameters</header>
+							<span>none</span>
+						</div>
+						<div class="details">
+							<header>description</header>
+							<p>calls external function VeevaQuery and returns resulting accessor object, or null </p>
+						</div>
+					</div>
+
+				</section>
+
+			</article>
+
+
+
+			<article class="entity" id="Presentation">
+
+
+				<header>
+					<h2>Presentation</h2>
+					<p>Presentation object as defined by Sidekick method <a href="#Sidekick_createPresentation">createPresentation.</a> Returns an accessor object exposing properties and methods allowing control over properties relating to the presentation's structure and slide carousel.</p>
+				</header>
+
+				<section>
+					<h3>Properties</h3>
+					<div class='property' id="Presentation_carousel">
+						<h4>carousel</h4>
+						<div class="details">
+							<header>permissions</header>
+							<ul>
+								<li>read</li>
+							</ul>
+						</div>
+						<div class="details">
+							<header>description</header>
+							<p class="description">Read-only accessor to the presentation's PresentationCarousel object</p>
+						</div>
+					</div>
+					<div class='property' id="Presentation_currentSlide">
+						<h4>currentSlide</h4>
+						<div class="details">
+							<header>permissions</header>
+							<ul>
+								<li>read</li>
+							</ul>
+						</div>
+						<div class="details">
+							<header>description</header>
+							<p class="description">Read-only accessor to the current active slide in display. this property is updated after PresentationCarousel's cycleEnd custom event is triggered.</p>
+						</div>
+					</div>
+					<div class='property' id="Presentation_events">
+						<h4>events</h4>
+						<div class="details">
+							<header>permissions</header>
+							<ul>
+								<li>read</li>
+							</ul>
+						</div>
+						<div class="details">
+							<header>description</header>
+							<p class="description">Read-only accessor to the Presentation object's inherent custom event handler object</p>
+						</div>
+					</div>
+					<div class='property' id="Presentation_options">
+						<h4>options</h4>
+						<div class="details">
+							<header>permissions</header>
+							<ul>
+								<li>read</li>
+							</ul>
+						</div>
+						<div class="details">
+							<header>description</header>
+							<p class="description">Read-only accessor to the Presentation object's options property</p>
+						</div>
+					</div>
+					<div class='property' id="Presentation_sitemap">
+						<h4>sitemap</h4>
+						<div class="details">
+							<header>permissions</header>
+							<ul>
+								<li>read</li>
+							</ul>
+						</div>
+						<div class="details">
+							<header>description</header>
+							<p class="description">Read-only accessor to the Presentation object's sitemap property - Stores object literal structure defined in the presentation data JSON defining Salesforce Presentation/KeyMessage structure</p>
+						</div>
+					</div>
+					<div class='property' id="Presentation_wrapper">
+						<h4>wrapper</h4>
+						<div class="details">
+							<header>permissions</header>
+							<ul>
+								<li>read</li>
+							</ul>
+						</div>
+						<div class="details">
+							<header>description</header>
+							<p class="description">Read-only accessor to the Presentation object's HTML wrapper element as defined in the presentation options upon instantiation</p>
+						</div>
+					</div>
+				</section>
+
+				<section>
+					<h3>Methods</h3>
+
+					<div class='property' id="Presentation_cycle">
+						<h4>cycle</h4>
+						<div class="details">
+							<header>parameters</header>
+							<ul>
+								<li class="type string required">direction</li>
+								<li class="type object optional">slideObject</li>
+							</ul>
+						</div>
+						<div class="details">
+							<header>description</header>
+							<p>cycles the PresentationCarousel in a specific direction. If slideObject argument is passed, will cycle to that slide with the specified direction.</p>
+						</div>
+					</div>
+
+					<div class='property' id="Presentation_cycleTo">
+
+						<h4>cycleTo</h4>
+
+						<div class="details">
+							<header>parameters</header>
+							<ul>
+								<li class="type string required">searchphrase</li>
+								<li class="type function optional">callback</li>
+							</ul>
+						</div>
+
+						<div class="details">
+							<header>description</header>
+							<p>uses argument searchphrase to find the desired slide within the presentation to cycle to. Automatically cycles to new section if slide is in different section. Primary expected value for searchprase is a slideID as defined within the presentation's JSON data. also supports an index of a slide within the current carousel array, or a reference to a Slide object. Triggers callback if slide cycle results in 'success' if callback is a proper function.</p>
+						</div>
+
+					</div>
+
+
+					<div class='property' id="Presentation_findSlide">
+
+						<h4>findSlide</h4>
+
+						<div class="details">
+							<header>parameters</header>
+							<ul>
+								<li class="type object required">searchphrase</li>
+							</ul>
+						</div>
+						<div class="details">
+							<header>returns</header>
+							<span>object</span>
+						</div>
+						<div class="details">
+							<header>description</header>
+							<p>Searches for a slide either by slideID or by a Slide object reference via argument 'searchprhase', returns a resulting object with specific information about the success of the query, the slide reference, index and section index if successful.</p>
+						</div>
+					</div>
+
+
+					<div class='property' id="Sidekick_load">
+
+						<h4>setSection</h4>
+
+						<div class="details">
+							<header>parameters</header>
+							<ul>
+								<li class="type integer required">sectionIndex</li>
+								<li class="type object optional">slideObject</li>
+								<li class="type boolean optional">fromSwipe</li>
+							</ul>
+						</div>
+						<div class="details">
+							<header>returns</header>
+							<span>object</span>
+						</div>
+						<div class="details">
+							<header>description</header>
+							<p>Sets section to a different section, which changes the PresentationCarousel's slide array. Requires a sectionIndex within the sections array property to switch to. Sections by default are defined in the presentation JSON structure. Optionally can specify a reference to a Slide object within the PresentationSection's slide array to transition to. If a third parameter of 'true' is passed, will transition to the end of the PresentationSection's slide array rather than its start.</p>
+						</div>
+					</div>
+
+
+				</section>
+
+			</article>
+
+
+
+			<article class="entity" id="PresentationSection">
+
+
+				<header>
+					<h2>PresentationSection</h2>
+					<p>defines a section within the Presentation object. Is automatically created when a section is defined within the presentation structure's JSON data, and is added to the Presentation instance's sections array.</p>
+				</header>
+
+				<section>
+					<h3>Properties</h3>
+					<div class='property' id="PresentationSection_properties">
+						<h4>properties</h4>
+						<div class="details">
+							<header>permissions</header>
+							<ul>
+								<li>read</li>
+							</ul>
+						</div>
+						<div class="details">
+							<header>description</header>
+							<p class="description">Read-only accessor to the PresentationSection's object instance properties</p>
+						</div>
+					</div>
+					<div class='property' id="PresentationSection_slides">
+						<h4>slides</h4>
+						<div class="details">
+							<header>permissions</header>
+							<ul>
+								<li>read</li>
+							</ul>
+						</div>
+						<div class="details">
+							<header>description</header>
+							<p class="description">Read-only accessor to the PresentationSection's slides array - holding an ordered array reference of all slides residing within the PresentationSection as defined in the presentation's JSON data</p>
+						</div>
+					</div>
+				</section>
+
+				<section>
+
+					<h3>Methods</h3>
+
+					<div class='property' id="PresentationSection_setStatus">
+						<h4>setStatus</h4>
+						<div class="details">
+							<header>parameters</header>
+							<ul>
+								<li class="type string required">status</li>
+							</ul>
+						</div>
+						<div class="details">
+							<header>description</header>
+							<p>Sets the status of the PresentationSection. valid values are 'active' and 'disabled'.</p>
+						</div>
+					</div>
+
+					<div class='property' id="PresentationSection_toggleDisplayStatus">
+
+						<h4>toggleDisplayStatus</h4>
+
+						<div class="details">
+							<header>parameters</header>
+							<span>none</span>
+						</div>
+
+						<div class="details">
+							<header>description</header>
+							<p>Toggles the PresentationSection's status to either active or disabled.</p>
+						</div>
+
+					</div>
+
+				</section>
+
+			</article>
+
+
+			<article class="entity" id="SlideCarousel">
+
+
+				<header>
+					<h2>SlideCarousel</h2>
+					<p>defines a local group of slides that can be cycled through via swipe gestures or explicit cycle commands.</p>
+				</header>
+
+				<section>
+					<h3>Properties</h3>
+					<div class='property' id="SlideCarousel_coordinages">
+						<h4>coordinates</h4>
+						<div class="details">
+							<header>permissions</header>
+							<ul>
+								<li>read</li>
+							</ul>
+						</div>
+						<div class="details">
+							<header>description</header>
+							<p class="description">Read-only accessor to the SlideCarousel's mouse/touch coordinates tracking object</p>
+						</div>
+					</div>
+					<div class='property' id="PresentationSection_currentSlide">
+						<h4>currentSlide</h4>
+						<div class="details">
+							<header>permissions</header>
+							<ul>
+								<li>read</li>
+								<li>write</li>
+							</ul>
+						</div>
+						<div class="details">
+							<header>description</header>
+							<p class="description">reference to the currently displayed slide within the carousel.</p>
+						</div>
+					</div>
+					<div class='property' id="PresentationSection_currentIndex">
+						<h4>currentIndex</h4>
+						<div class="details">
+							<header>permissions</header>
+							<ul>
+								<li>read</li>
+							</ul>
+						</div>
+						<div class="details">
+							<header>description</header>
+							<p class="description">Read-only reference to the current index within the SlideCarousel's slide array.</p>
+						</div>
+					</div>
+					<div class='property' id="PresentationSection_events">
+						<h4>events</h4>
+						<div class="details">
+							<header>permissions</header>
+							<ul>
+								<li>read</li>
+							</ul>
+						</div>
+						<div class="details">
+							<header>description</header>
+							<p class="description">Read-only access to the SlideCarousel's custom events object.</p>
+						</div>
+					</div>
+					<div class='property' id="PresentationSection_flags">
+						<h4>flags</h4>
+						<div class='property'>
+							<h4>cycling</h4>
+							<div class="details">
+								<header>permissions</header>
+								<ul>
+									<li>read</li>
+								</ul>
+							</div>
+							<div class="details">
+								<header>description</header>
+								<p class="description">Get value of a flag signalling if carousel is currently cycling</p>
+							</div>
+						</div>
+						<div class='property'>
+							<h4>freeze</h4>
+							<div class="details">
+								<header>permissions</header>
+								<ul>
+									<li>read</li>
+									<li>write</li>
+								</ul>
+							</div>
+							<div class="details">
+								<header>description</header>
+								<p class="description">Get or Set a flag to freeze the transition of the carousel</p>
+							</div>
+						</div>
+						<div class='property'>
+							<h4>transitioning</h4>
+							<div class="details">
+								<header>permissions</header>
+								<ul>
+									<li>read</li>
+								</ul>
+							</div>
+							<div class="details">
+								<header>description</header>
+								<p class="description">Get value of a flag signalling whether carousel is currently in a transition</p>
+							</div>
+						</div>
+					</div>
+
+					<div class='property' id="SlideCarousel_slides">
+						<h4>slides</h4>
+						<div class="details">
+							<header>permissions</header>
+							<ul>
+								<li>read</li>
+								<li>write</li>
+							</ul>
+						</div>
+						<div class="details">
+							<header>description</header>
+							<p class="description">Reference to the slide array within the carousel</p>
+						</div>
+					</div>
+				</section>
+
+				<section>
+
+					<h3>Methods</h3>
+
+					<div class='property' id="SlideCarousel_findAdjacentSlides">
+						<h4>findAdjacentSlides</h4>
+						<div class="details">
+							<header>parameters</header>
+							<ul>
+								<li class="type object required">slideObject</li>
+							</ul>
+						</div>
+						<div class="details">
+							<header>description</header>
+							<p>Finds slide object references within the slides array that are adjacent to the slideObject argument. Returns an object with previous/next properties containing references to the adjacent slides.</p>
+						</div>
+					</div>
+
+					<div class='property' id="SlideCarousel_findSlide">
+
+						<h4>findSlide</h4>
+
+						<div class="details">
+							<header>parameters</header>
+							<ul>
+								<li class="type string required">searchstring</li>
+							</ul>
+						</div>
+
+						<div class="details">
+							<header>description</header>
+							<p>Finds a reference to a slide as defined by the searchstring argument. searchstring can be either a slideID, an index integer, or a Slide object reference. Returns an object with the found slide's reference and index within the slides array, or a failure report if none is found.</p>
+						</div>
+
+					</div>
+
+				</section>
+
+			</article>
+
+
+
+
+			<article class="entity" id="Slide">
+
+
+				<header>
+					<h2>Slide</h2>
+					<p>An object representing an individual slide's properties, access to its HTML wrapper within the carousel wrapper. Many properties are defined by the presentation's JSON data structure, allowing for built-in default properties, user defined properties and custom events for each slide.</p>
+				</header>
+
+				<section>
+					<h3>Properties</h3>
+					<div class='property' id="Slide_customProperties">
+						<h4>customProperties</h4>
+						<div class="details">
+							<header>permissions</header>
+							<ul>
+								<li>read</li>
+								<li>write</li>
+							</ul>
+						</div>
+						<div class="details">
+							<header>description</header>
+							<p class="description">An object containing user-defined, custom properties. Originally defined in presentation JSON data but can be read/modified at any time.</p>
+						</div>
+					</div>
+					<div class='property' id="Slide_events">
+						<h4>events</h4>
+						<div class="details">
+							<header>permissions</header>
+							<ul>
+								<li>read</li>
+							</ul>
+						</div>
+						<div class="details">
+							<header>description</header>
+							<p class="description">Read-only accessor to the Slide object instance's custom event handler object</p>
+						</div>
+					</div>
+					<div class='property' id="Slide_properties">
+						<h4>properties</h4>
+						<div class="details">
+							<header>permissions</header>
+							<ul>
+								<li>read</li>
+							</ul>
+						</div>
+						<div class="details">
+							<header>description</header>
+							<p class="description">Read-only accessor to the default properties as defined within the presentation's JSON data</p>
+						</div>
+					</div>
+					<div class='property' id="Slide_wrapper">
+						<h4>wrapper</h4>
+						<div class="details">
+							<header>permissions</header>
+							<ul>
+								<li>read</li>
+							</ul>
+						</div>
+						<div class="details">
+							<header>description</header>
+							<p class="description">Read-only access to the Slide object instance's HTML wrapper.</p>
+						</div>
+					</div>
+
+				</section>
+
+				<section>
+
+					<h3>Methods</h3>
+
+					<div class='property' id="Slide_hasStatus">
+						<h4>hasStatus</h4>
+						<div class="details">
+							<header>parameters</header>
+							<ul>
+								<li class="type string required">status</li>
+							</ul>
+						</div>
+						<div class="details">
+							<header>description</header>
+							<p>Determines if a Slide instance has a particular status assigned to it.</p>
+						</div>
+					</div>
+
+					<div class='property' id="Slide_setStatus">
+
+						<h4>setStatus</h4>
+
+						<div class="details">
+							<header>parameters</header>
+							<ul>
+								<li class="type string required">statusString</li>
+								<li class="type string optional">action</li>
+							</ul>
+						</div>
+
+						<div class="details">
+							<header>description</header>
+							<p>Sets a Slide instance's status with a space-separated string representing a list of statuses. An optional 'action' argument can be set to determine whether the strings will be added to, removed, or replace the existing slide status(es). By default this action is replace.</p>
+						</div>
+
+					</div>
+
+				</section>
+
+			</article>
+
+
+		</div>
+
+	</body>
+
+</html>
